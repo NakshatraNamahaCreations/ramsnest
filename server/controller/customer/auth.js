@@ -1,0 +1,134 @@
+const customermodel = require("../../model/customer/auth");
+const {toTitleCase,validateEmail}=require("../../config/function");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../../config/key");
+
+class customerauth {
+  async postSignup(req, res) {
+    let { name, email, password, cpassword, phonenumber, profileimage } =
+      req.body;
+
+    if (!name || !email || !password || !cpassword || !phonenumber) {
+      return res.status(500).json({ error: "Filed must not be empty" });
+    }
+    if (name.length < 3 || name.length > 25) {
+      //   error = { ...error, name: "Name must be 3-25 charecter" };
+      return res.status(500).json({ error: "Name must be 3-25 charecter" });
+    }
+    if (phonenumber.length != 10) {
+      //   error = { ...error, name: "Name must be 3-25 charecter" };
+      return res.status(500).json({ error: "Enter 10 Digit number" });
+    } else {
+      if (validateEmail(email)) {
+        name = toTitleCase(name);
+        if ((password.length > 255) | (password.length < 8)) {
+          return res
+            .status(403)
+            .json({ error: "Password must be 8 charecter" });
+        } else {
+          // If Email & Number exists in Database then:
+          try {
+            password = bcrypt.hashSync(password, 10);
+            const data = await customermodel.findOne({ email: email });
+            if (data) {
+              return res.status(403).json({ error: "Email already exists" });
+            } else {
+              const data = await customermodel.findOne({
+                phonenumber: phonenumber,
+              });
+              if (data) {
+                return res
+                  .status(403)
+                  .json({ error: "Phone number is already exists" });
+              } else {
+                let newUser = new customermodel({
+                  name,
+                  email,
+                  password,
+                  phonenumber,
+                  profileimage,
+                  role: 1,
+                  usertype: "email",
+                });
+                newUser
+                  .save()
+                  .then((data) => {
+                    return res.json({
+                      success: "Account create successfully. Please login",
+                      user: {
+                        id: data._id,
+                        name: data.name,
+                        email: data.email,
+                        phonenumber: data.phonenumber,
+                        status: data.status,
+                        usertype: data.usertype,
+                        profileimage: "",
+                      },
+                    });
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      } else {
+        return res.status(403).json({ error: "Email is not valid" });
+      }
+    }
+  }
+
+  async postSignin(req, res) {
+    let { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(500).json({
+        error: "Fields must not be empty",
+      });
+    }
+    try {
+      const data = await customermodel.findOneAndUpdate(
+        { email: email },
+        { status: "online" }
+      );
+      if (!data) {
+        return res.status(403).json({
+          error: "Invalid email",
+        });
+      } else {
+        const login = await bcrypt.compare(password, data.password);
+        console.log(login);
+        if (login) {
+          const token = jwt.sign(
+            {
+              id: data._id,
+              name: data.name,
+              email: data.email,
+              phonenumber: data.phonenumber,
+            
+            },
+            JWT_SECRET
+          );
+          const encode = jwt.verify(token, JWT_SECRET);
+
+          return res.json({
+            token: token,
+            user: encode,
+          });
+        } else {
+          return res.status(403).json({
+            error: "Invalid password",
+          });
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+const customercontroller=new customerauth();
+module.exports=customercontroller;

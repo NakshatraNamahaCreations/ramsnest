@@ -1,0 +1,7 @@
+{
+  "name": "Ram's Nest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

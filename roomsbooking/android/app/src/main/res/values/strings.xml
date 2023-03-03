@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">roomsbooking</string>
+    <string name="title_activity_main">roomsbooking</string>
+    <string name="package_name">io.ionic.roomsbooking</string>
+    <string name="custom_url_scheme">io.ionic.roomsbooking</string>
+</resources>
