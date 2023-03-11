@@ -14,7 +14,7 @@ function Signup() {
       setLoading(true);
       try {
         const config = {
-          url: "http://localhost:8080/api/customersignin",
+          url: "https://api.howdzat.com/api/customersignin",
           method: "POST",
           headers: { "content-type": "application/json" },
           data: { email: email, password: password },

@@ -17,7 +17,7 @@ export let initialState = {
   
   export const getBasketTotal = (basket) =>
     basket?.reduce(
-      (amount, item) => item.product.productprice * item.quantity + amount,
+      (amount, item) => item.product.foodprice * item.quantity + amount,
       0
     );
   

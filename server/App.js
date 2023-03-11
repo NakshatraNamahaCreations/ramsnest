@@ -29,11 +29,24 @@ app.use(express.static("public"));
 const customerauth = require("./route/customer/auth");
 const banner=require("./route/admin/banner");
 const slider=require("./route/admin/slider");
+const category=require("./route/foods/category");
+const subcategory=require("./route/foods/subcategory");
+const food=require("./route/foods/food");
+const packages =require("./route/package/packages");
+const adminlogin=require("./route/admin/adminlogin");
+const promocode=require("./route/admin/promocode");
 
 //routes
 app.use("/api", customerauth);
 app.use("/api",banner);
 app.use("/api",slider);
+app.use("/api",category);
+app.use("/api",food);
+app.use("/api",subcategory);
+app.use("/api",packages);
+app.use("/api",adminlogin);
+app.use("/api",promocode);
+
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

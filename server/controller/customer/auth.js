@@ -128,6 +128,15 @@ class customerauth {
       console.log(err);
     }
   }
+
+  async getallcustomer(req, res) {
+    const customers = await customermodel.find({});
+    if (customers) {
+      return res.json({ customers: customers });
+    } else {
+      return res.status(500).json({ error: "something went to wrong" });
+    }
+  }
 }
 
 const customercontroller=new customerauth();

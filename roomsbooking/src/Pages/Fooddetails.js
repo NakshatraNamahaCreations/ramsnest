@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
+import { connect } from "react-redux";
 
-function Fooddetails() {
-  const [index, setIndex] = useState(0);
+function Fooddetails(props) {
   const [qty, setqty] = useState(1);
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
+
   const inc = () => {
     setqty(qty + 1);
   };
   const dec = () => {
     setqty(qty - 1);
   };
-
+  //add to cart
+  const addtocart = (e) => {
+    props.dispatch({
+      type: "addBasketItem",
+      item: { product: e, quantity: 1 },
+    });
+    alert("Food is added to cart");
+  };
   return (
     <div>
       <div>
@@ -30,37 +35,24 @@ function Fooddetails() {
             }}
           ></i>
         </a>
-        <Carousel activeIndex={index} onSelect={handleSelect}>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141352.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=sph"
-              alt="First slide"
-              style={{ height: "285px" }}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=sph"
-              alt="Second slide"
-              style={{ height: "285px" }}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://img.freepik.com/free-photo/top-view-fast-food-mix-mozzarella-sticks-club-sandwich-hamburger-mushroom-pizza-caesar-shrimp-salad-french-fries-ketchup-mayo-cheese-sauces-table_141793-3998.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=sph"
-              alt="Third slide"
-              style={{ height: "285px" }}
-            />
-          </Carousel.Item>
+
+        <Carousel>
+          {props.subscribe.foods.foodimage.map((i) => (
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={"http://localhost:8080/food/" + i}
+                alt="First slide"
+                style={{ height: "285px" }}
+              />
+            </Carousel.Item>
+          ))}
         </Carousel>
       </div>
       <div className="margin">
         <div className="hc">
           <h4>
-            <b>Veg Palav</b>
+            <b>{props.subscribe.foods.foodname}</b>
           </h4>
           <i class="fa-regular fa-bookmark"></i>
         </div>
@@ -68,38 +60,46 @@ function Fooddetails() {
           <h5 className="margintop">
             <b>Description</b>
           </h5>
-          <p>
-            To book HiCare Home Food Services follow these steps: Fill your pin
-            code in the prompt on the website
-          </p>
+          <p>{props.subscribe.foods.fooddesc}</p>
+          <h5 className="margintop"></h5>
         </div>
-        <h5 style={{ marginTop: "40px",textAlign:"center" }}>Quantity</h5>
-      <div className="wh" style={{marginLeft:"25%"}}>
-        <div className="whs"></div>
-
-        <div className="whs1" style={{marginLeft:"20%"}}>
-          <i
+        <h5 style={{ marginTop: "40px", textAlign: "center" }}>Price</h5>
+        <div className="wh" style={{ marginLeft: "25%" }}>
+          <div className="whs1" style={{ marginLeft: "35%" }}>
+            <b>
+              {" "}
+              <i
+                class="fa-solid fa-indian-rupee-sign"
+                style={{ marginTop: "3px",marginRight:"5px" }}
+              ></i>
+              {props.subscribe.foods.foodprice}
+            </b>
+            {/* <i
             class="fa-solid fa-circle-minus"
             onClick={dec}
             disabled={qty <= 1}
           ></i>
           <p style={{ marginTop: "-5px" }}> {qty} </p>
-          <i class="fa-solid fa-circle-plus" onClick={inc}></i>
+          <i class="fa-solid fa-circle-plus" onClick={inc}></i> */}
+          </div>
         </div>
-      </div>
       </div>
       <div className="ftbook">
         <div className="cont">
-          <a href="/bookinginformation" style={{ color: "white !important" }}>
-            <button>
-              Order
-             
-            </button>
-          </a>
+          
+            <button onClick={() => addtocart(props.subscribe.foods)}>Add to cart</button>
+        
         </div>
       </div>
     </div>
   );
 }
 
-export default Fooddetails;
+const mapStateToProps = (state) => {
+  return {
+    subscribe: state.Subscribe,
+    basket: state.basket,
+  };
+};
+
+export default connect(mapStateToProps)(Fooddetails);

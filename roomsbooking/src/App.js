@@ -31,10 +31,11 @@ import Viewallpackages from "./Pages/Viewallpackages";
 import Foods from "./Pages/Foods";
 import Fooddetails from "./Pages/Fooddetails";
 import Cart from "./Pages/Cart";
-import Sidebar from "./Admin/Sidebar";
-import Adhome from "./Admin/Adhome";
-import Rooms from "./Admin/Rooms";
-import ProSidebar from "./Admin/ProSidebar";
+import Foodcategory from "./Pages/Foodcategory";
+import Foodsubcategory from "./Pages/Foodsubcategory";
+import Allfoods from "./Pages/Allfoods";
+import Allfooddetails from "./Pages/Allfooddetails";
+import Packagedetails from "./Pages/Packagedetails";
 
 
 function App() {
@@ -74,14 +75,16 @@ function App() {
           <Route path="/security" element={<Security />}></Route>
           <Route path="/vap" element={<Viewallpackages />}></Route>
           <Route path="/foods" element={<Foods />}></Route>
-          <Route path="/fooddetails" element={<Fooddetails/>}></Route>
-          <Route path="/cart" element={<Cart/>}></Route>
+          <Route path="/fooddetails" element={<Fooddetails />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/foodcategory" element={<Foodcategory />}>
+            {" "}
+          </Route>
+          <Route path="/foodsubcategory" element={<Foodsubcategory />}></Route>
+          <Route path="/allfoods" element={<Allfoods />}></Route>
+          <Route path="/allfooddetails" element={<Allfooddetails />}></Route>
+          <Route path="/packagedetails" element={<Packagedetails />}></Route>
 
-          //admin
-          <Route path="/admin/proSidebar" element={<ProSidebar />}></Route>
-          <Route path="/admin/sidebar" element={<Sidebar />}></Route>
-          <Route path="/admin/adhome" element={<Adhome />}></Route>
-          <Route path="/admin/rooms" element={<Rooms />}></Route>
         </Routes>
       </Router>
     </div>

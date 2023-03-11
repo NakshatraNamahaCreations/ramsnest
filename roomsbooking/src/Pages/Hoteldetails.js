@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
-{
-  /* https://youtu.be/ZcNDiQdL1Q8 */
-}
 function Hoteldetails() {
   const [index, setIndex] = useState(0);
 

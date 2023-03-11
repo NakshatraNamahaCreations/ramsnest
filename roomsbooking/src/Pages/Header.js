@@ -137,7 +137,7 @@ function Header() {
           />
         </div>
       </div>
-      <div className="margin" style={{ marginTop: "15px" }}>
+      {/* <div className="margin" style={{ marginTop: "15px" }}>
         <OwlCarousel className="owl-theme" loop margin={10} nav items={1}>
           <div class="item">
             <img
@@ -175,7 +175,7 @@ function Header() {
             />
           </div>
         </OwlCarousel>
-      </div>
+      </div> */}
       <Modal
         show={show}
         onHide={() => setShow(false)}
