@@ -20,7 +20,7 @@ function Foods(props) {
   }, [data]);
   const postallsubcategory = async () => {
     let res = await axios.get(
-      "http://localhost:8080/api/getcustomerfood/" + data.subcategoryname
+      "https://api.howdzat.com/api/getcustomerfood/" + data.subcategoryname
     );
     if ((res.status = 200)) {
       // console.log(res);
@@ -166,7 +166,7 @@ function Foods(props) {
                     to={{ pathname: "/fooddetails", data: { foods: data } }}
                   >
                     <img
-                      src={"http://localhost:8080/food/" + data.foodimage[0]}
+                      src={"https://api.howdzat.com/food/" + data.foodimage[0]}
                       width="100px"
                     />{" "}
                   </Link>

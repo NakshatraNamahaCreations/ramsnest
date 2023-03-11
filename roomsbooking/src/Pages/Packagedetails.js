@@ -30,7 +30,7 @@ function Packagedetails() {
         <div>
           <img
             className="d-block w-100"
-            src={"http://localhost:8080/package/" + data.packageimage}
+            src={"https://api.howdzat.com/package/" + data.packageimage}
             alt="First slide"
             style={{ height: "250px", marginTop: "20px" }}
           />

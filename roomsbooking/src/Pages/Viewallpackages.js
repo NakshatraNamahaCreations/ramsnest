@@ -10,7 +10,7 @@ function Viewallpackages() {
   }, []);
 
   const getallpackages = async () => {
-    let res = await axios.get("http://localhost:8080/api/getallpackages");
+    let res = await axios.get("https://api.howdzat.com/api/getallpackages");
     if ((res.status = 200)) {
       console.log(res);
       setpackages(res.data?.packages);
@@ -51,7 +51,7 @@ function Viewallpackages() {
                 <Link  to={{ pathname: "/packagedetails", item: { data: data } }}>
                 <div>
                   <img
-                    src={"http://localhost:8080/package/" + data.packageimage}
+                    src={"https://api.howdzat.com/package/" + data.packageimage}
                     width="100%"
                   />
                   <h5>{data.packagename}</h5>

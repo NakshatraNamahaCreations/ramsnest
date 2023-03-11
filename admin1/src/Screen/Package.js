@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 function Rooms() {
   const { SearchBar, ClearSearchButton } = Search;
-  const imageURL = "http://localhost:8080";
+  const imageURL = "https://api.howdzat.com";
   const [packages, setpackages] = useState([]);
   const formdata = new FormData();
   const { ExportCSVButton } = CSVExport;
@@ -21,7 +21,7 @@ function Rooms() {
   const remove = async (data) => {
     axios({
       method: "post",
-      url: "http://localhost:8080/api/deletepackage/" + data._id,
+      url: "https://api.howdzat.com/api/deletepackage/" + data._id,
     })
       .then(function (response) {
         //handle success
@@ -46,7 +46,7 @@ function Rooms() {
         return (
           <div>
             <img
-              src={"http://localhost:8080/package/" + row.packageimage}
+              src={"https://api.howdzat.com/package/" + row.packageimage}
               width="45px"
               height="45px"
             />
@@ -143,7 +143,7 @@ function Rooms() {
   }, []);
 
   const getallpackages = async () => {
-    let res = await axios.get("http://localhost:8080/api/getallpackages");
+    let res = await axios.get("https://api.howdzat.com/api/getallpackages");
     if ((res.status = 200)) {
       console.log(res);
       setpackages(res.data?.packages);

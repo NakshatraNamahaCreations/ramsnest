@@ -17,7 +17,7 @@ function Customers() {
   const [data, setdata] = useState([]);
   const { SearchBar, ClearSearchButton } = Search;
   const { ExportCSVButton } = CSVExport;
-  const apiURL = "http://localhost:8080/api";
+  const apiURL = "https://api.howdzat.com/api";
 
   useEffect(() => {
     getcustomer();

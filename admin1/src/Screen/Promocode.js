@@ -22,8 +22,8 @@ function Promocode() {
   const [category, setcategory] = useState("");
   const { SearchBar, ClearSearchButton } = Search;
   const { ExportCSVButton } = CSVExport;
-  const apiURL = "http://localhost:8080/api";
-  const imageURL = "http://localhost:8080";
+  const apiURL = "https://api.howdzat.com/api";
+  const imageURL = "https://api.howdzat.com";
 
   const showModal = () => {
     setIsOpen(true);

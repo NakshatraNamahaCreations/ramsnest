@@ -11,7 +11,7 @@ function Foodcategory() {
   }, []);
 
   const getcategory = async () => {
-    let res = await axios.get("http://localhost:8080/api/getcategory");
+    let res = await axios.get("https://api.howdzat.com/api/getcategory");
     if ((res.status = 200)) {
       setcategorydata(res.data?.category);
     } else {
@@ -37,7 +37,7 @@ function Foodcategory() {
                 <Link to="/foodsubcategory" state={{data:data}}>
                 <div>
                   <img
-                    src={"http://localhost:8080/category/" + data.categoryimage}
+                    src={"https://api.howdzat.com/category/" + data.categoryimage}
                     width="100%"
                   />
                   <h5>{data.categoryname}</h5>

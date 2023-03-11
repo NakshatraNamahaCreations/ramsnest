@@ -20,7 +20,7 @@ function Customerbanner() {
   const [bannerdata, setbannerdata] = useState([]);
   const { SearchBar, ClearSearchButton } = Search;
   const { ExportCSVButton } = CSVExport;
-  const imageURL = "http://localhost:8080/api/banner";
+  const imageURL = "https://api.howdzat.com/api/banner";
   const formdata = new FormData();
   const [data, setdata] = useState([]);
 
@@ -34,7 +34,7 @@ function Customerbanner() {
     formdata.append("banner", image);
     try {
       const config = {
-        url: "http://localhost:8080/api/addbanner",
+        url: "https://api.howdzat.com/api/addbanner",
         method: "post",
         data: formdata,
         headers: { "Content-Typr": "multipart/form-data" },
@@ -55,7 +55,7 @@ function Customerbanner() {
 
   const getimage = () => {
     axios
-      .get("http://localhost:8080/api/getallbanner")
+      .get("https://api.howdzat.com/api/getallbanner")
       .then(function (response) {
         // handle success
 
@@ -135,7 +135,7 @@ function Customerbanner() {
   const deleteimage = async (id) => {
     axios({
       method: "post",
-      url: "http://localhost:8080/api/deletebanner/" + id,
+      url: "https://api.howdzat.com/api/deletebanner/" + id,
     })
       .then(function (response) {
         //handle success
@@ -206,7 +206,7 @@ function Customerbanner() {
                   <td>{i++}</td>
                   <td>
                     <img
-                      src={"http://localhost:8080/banner/" + item.banner}
+                      src={"https://api.howdzat.com/banner/" + item.banner}
                       style={{ width: "80px", height: "70px" }}
                     />
                   </td>

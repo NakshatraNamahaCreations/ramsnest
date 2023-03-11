@@ -13,8 +13,8 @@ import axios from "axios";
 import { useEffect } from "react";
 
 function Category() {
-  const imageURL = "http://localhost:8080";
-  const apiURL = "http://localhost:8080/api";
+  const imageURL = "https://api.howdzat.com";
+  const apiURL = "https://api.howdzat.com/api";
   const [categoryname, setcategoryname] = useState("");
   const [categoryimage, setcategoryimage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +87,7 @@ function Category() {
     axios({
       method: "post",
       url:
-        "http://localhost:8080/api/deletecategory/" +
+        "https://api.howdzat.com/api/deletecategory/" +
         data._id,
     })
       .then(function (response) {

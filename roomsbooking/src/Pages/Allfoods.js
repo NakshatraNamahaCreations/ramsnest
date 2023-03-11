@@ -18,7 +18,7 @@ function Foods(props) {
   }, []);
 
   const getallfoods = async () => {
-    let res = await axios.get("http://localhost:8080/api/getallfood");
+    let res = await axios.get("https://api.howdzat.com/api/getallfood");
     if ((res.status = 200)) {
       setLoading(false);
       setfoods(res.data?.foods);
@@ -150,7 +150,7 @@ function Foods(props) {
                 <div style={{ width: "50%" }} className="slimg">
             <Link to="/allfooddetails" state={{data:data}}>
                     <img
-                      src={"http://localhost:8080/food/" + data.foodimage[0]}
+                      src={"https://api.howdzat.com/food/" + data.foodimage[0]}
                       width="100px"
                     />{" "}
               </Link>

@@ -14,7 +14,7 @@ function Foodsubcategory() {
     postallsubcategory();
   }, [data]);
   const postallsubcategory = async () => {
-    let res = await axios.post("http://localhost:8080/api/postsubcategory", {
+    let res = await axios.post("https://api.howdzat.com/api/postsubcategory", {
       categoryname: data.categoryname,
     });
     if ((res.status = 200)) {
@@ -71,7 +71,7 @@ const allfoods=()=>{
                     <div>
                       <img
                         src={
-                          "http://localhost:8080/subcategory/" +
+                          "https://api.howdzat.com/subcategory/" +
                           data.subcategoryimage
                         }
                         width="100%"

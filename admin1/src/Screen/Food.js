@@ -18,7 +18,7 @@ import { DownloadTableExcel } from "react-export-table-to-excel";
 function Rooms() {
   const [isOpen, setIsOpen] = useState(false);
   const { SearchBar, ClearSearchButton } = Search;
-  const imageURL = "http://localhost:8080";
+  const imageURL = "https://api.howdzat.com";
   const [selected, setselected] = useState([]);
 
   const [stock, setstock] = useState("");
@@ -46,7 +46,7 @@ function Rooms() {
   const remove = async (data) => {
     axios({
       method: "post",
-      url: "http://localhost:8080/api/deletefood/" + data._id,
+      url: "https://api.howdzat.com/api/deletefood/" + data._id,
     })
       .then(function (response) {
         //handle success
@@ -79,9 +79,9 @@ function Rooms() {
       formatter:(cell,row)=>{
         return(
           <div > 
-            <img src={"http://localhost:8080/food/" + row.foodimage[0]}  width="45px" height="45px"/>
-            <img className="fi" src={"http://localhost:8080/food/" + row.foodimage[1]}  width="45px" height="45px"/>
-            <img  className="fi" src={"http://localhost:8080/food/" + row.foodimage[2]}  width="45px" height="45px"/>
+            <img src={"https://api.howdzat.com/food/" + row.foodimage[0]}  width="45px" height="45px"/>
+            <img className="fi" src={"https://api.howdzat.com/food/" + row.foodimage[1]}  width="45px" height="45px"/>
+            <img  className="fi" src={"https://api.howdzat.com/food/" + row.foodimage[2]}  width="45px" height="45px"/>
           </div>
         )
       }
@@ -162,7 +162,7 @@ function Rooms() {
 
   const getallfoods = async () => {
     let res = await axios.get(
-      "http://localhost:8080/api/getallfood"
+      "https://api.howdzat.com/api/getallfood"
     );
     if ((res.status = 200)) {
       console.log(res);

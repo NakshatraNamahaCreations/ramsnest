@@ -22,7 +22,7 @@ function Login() {
     } else {
       try {
         const config = {
-          url: "http://localhost:8080/api/adminsignup",
+          url: "https://api.howdzat.com/api/adminsignup",
           method: "post",
           headers: { "content-type": "application/json" },
           data: {
@@ -53,7 +53,7 @@ function Login() {
     } else {
       try {
         const config = {
-          url: "http://localhost:8080/api/adminsignin",
+          url: "https://api.howdzat.com/api/adminsignin",
           method: "POST",
           headers: { "content-type": "application/json" },
           data: {

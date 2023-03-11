@@ -34,7 +34,7 @@ function Fooddetails(props) {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={"http://localhost:8080/food/" + data.foodimage[0]}
+              src={"https://api.howdzat.com/food/" + data.foodimage[0]}
               alt="First slide"
               style={{ height: "285px" }}
             />

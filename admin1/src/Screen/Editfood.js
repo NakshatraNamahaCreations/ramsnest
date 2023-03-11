@@ -17,7 +17,7 @@ function Editfood() {
   const [subcategory, setsubcategory] = useState(data.subcategory);
   const [categorydata, setcategorydata] = useState([]);
   const [subcategorydata, setsubcategorydata] = useState([]);
-  const apiURL = "http://localhost:8080/api";
+  const apiURL = "https://api.howdzat.com/api";
   const [productname, setproductname] = useState(data.productname);
   const [productdesc, setproductdesc] = useState(data.productdesc);
   const [productprice, setproductprice] = useState(data.productprice);
@@ -49,7 +49,7 @@ function Editfood() {
     formdata.append("subcategory",subcategory);
     axios({
         method: "post",
-        url: `http://localhost:8080/api/product/editproduct/${data._id}` ,
+        url: `https://api.howdzat.com/api/product/editproduct/${data._id}` ,
         data: formdata,
         headers: { "Content-Type": "multipart/form-data" },
       })

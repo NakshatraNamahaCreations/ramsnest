@@ -39,7 +39,7 @@ function Cart(props) {
                   <div style={{ width: "50%" }} className="slimg">
                     <img
                       src={
-                        "http://localhost:8080/food/" +
+                        "https://api.howdzat.com/food/" +
                         foods.product.foodimage[0]
                       }
                       width="100px"

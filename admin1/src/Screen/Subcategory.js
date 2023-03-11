@@ -14,8 +14,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useEffect } from "react";
 
 function Category() {
-  const imageURL = "http://localhost:8080";
-  const apiURL = "http://localhost:8080/api";
+  const imageURL = "https://api.howdzat.com";
+  const apiURL = "https://api.howdzat.com/api";
   const [subcategoryname, setsubcategoryname] = useState("");
   const [categoryname, setcategoryname] = useState("");
   const [subcategoryimage, setsubcategoryimage] = useState("");
@@ -98,7 +98,7 @@ function Category() {
     axios({
       method: "post",
       url:
-        "http://localhost:8080/api/deletesubcategory/" +
+        "https://api.howdzat.com/api/deletesubcategory/" +
         data._id,
     })
       .then(function (response) {

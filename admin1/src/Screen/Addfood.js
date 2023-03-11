@@ -16,7 +16,7 @@ function Addfood() {
   const [subcategorydata, setsubcategorydata] = useState([]);
   const [categoryname, setcategoryname] = useState("");
   const [subcategoryname, setsubcategoryname] = useState("");
-  const apiURL = "http://localhost:8080/api";
+  const apiURL = "https://api.howdzat.com/api";
   const [image1, setimage1] = useState("");
   const [image2, setimage2] = useState("");
   const [image3, setimage3] = useState("");

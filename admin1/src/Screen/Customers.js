@@ -23,7 +23,7 @@ function Customers() {
   const getcustomer = () => {
     try {
       axios
-        .get("http://localhost:8080/api/allcustomer")
+        .get("https://api.howdzat.com/api/allcustomer")
         .then(function (response) {
           if (response.status === 200) {
            
