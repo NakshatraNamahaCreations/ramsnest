@@ -78,6 +78,7 @@ class food {
     return res.json({ sucess: "Delete successfuly" });
   }
 
+ 
   //edit
 
   async editfood(req, res) {

@@ -18,7 +18,7 @@ function Foodsubcategory() {
       categoryname: data.categoryname,
     });
     if ((res.status = 200)) {
-      console.log(res);
+    
       setLoading(false);
       setsubcategorydata(res.data?.subcategory);
     } else {

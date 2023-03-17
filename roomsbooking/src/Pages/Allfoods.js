@@ -39,14 +39,14 @@ function Foods(props) {
   } else {
     <p>No data found...!</p>;
   }
-    //add to cart
-    const addtocart = (e) => {
-        props.dispatch({
-          type: "addBasketItem",
-          item: { product: e, quantity: 1 },
-        });
-        alert("Food is added to cart");
-      };
+  //add to cart
+  const addtocart = (e) => {
+    props.dispatch({
+      type: "addBasketItem",
+      item: { product: e, quantity: 1 },
+    });
+    alert("Food is added to cart");
+  };
   const allfoods = () => {
     window.location.assign("/allfoods");
   };
@@ -148,12 +148,12 @@ function Foods(props) {
             {foods?.map((data) => (
               <div className="flex seal" style={{ marginTop: "20px" }}>
                 <div style={{ width: "50%" }} className="slimg">
-            <Link to="/allfooddetails" state={{data:data}}>
+                  <Link to="/allfooddetails" state={{ data: data }}>
                     <img
                       src={"https://api.howdzat.com/food/" + data.foodimage[0]}
                       width="100px"
                     />{" "}
-              </Link>
+                  </Link>
                 </div>
                 <div style={{ width: "100%" }}>
                   <div className="justbt">
@@ -175,7 +175,9 @@ function Foods(props) {
                       ></i>
                       4.8 (4,378)
                     </p>
-                    <button className="addcart" onClick={() => addtocart(data)}>ADD</button>
+                    <button className="addcart" onClick={() => addtocart(data)}>
+                      ADD
+                    </button>
                   </div>
                 </div>
               </div>
@@ -196,10 +198,10 @@ function Foods(props) {
   );
 }
 const mapStateToProps = (state) => {
-    return {
-      subscribe: state.Subscribe,
-      basket: state.basket,
-    };
+  return {
+    subscribe: state.Subscribe,
+    basket: state.basket,
   };
-  
-  export default connect(mapStateToProps)(Foods);
+};
+
+export default connect(mapStateToProps)(Foods);

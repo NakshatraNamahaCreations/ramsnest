@@ -58,7 +58,7 @@ function Signup() {
   if (loading) {
     return (
       <div
-        style={{ marginTop: "50%", marginBottom: "50%", textAlign: "center" }}
+        style={{ marginTop: "100%", marginBottom: "50%", textAlign: "center" }}
       >
         <div class="spinner-border text-dark" role="status">
           <span class="sr-only"></span>

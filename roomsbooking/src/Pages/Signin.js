@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  useEffect(() => {
+    if (user) {
+      window.location.assign("/home");
+    }
+  }, []);
 
   const signin = async (e) => {
     e.preventDefault();
@@ -22,8 +28,6 @@ function Signup() {
         await axios(config)
           .then(function (response) {
             if (response.status === 200) {
-              console.log(response.data);
-              alert("login succcessfull");
               setLoading(false);
               sessionStorage.setItem("user", JSON.stringify(response.data.user));
               window.location.assign("/home");
@@ -46,7 +50,7 @@ function Signup() {
  
   if(loading){
     return(
-      <div style={{marginTop:"50%",marginBottom:"50%",textAlign:"center"}}>
+      <div style={{marginTop:"100%",marginBottom:"50%",textAlign:"center"}}>
         <div class="spinner-border text-dark" role="status">
           <span class="sr-only"></span>
         </div>

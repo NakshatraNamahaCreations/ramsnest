@@ -9,7 +9,7 @@ import Select from "react-select";
 import { getValue } from "@mui/system";
 
 function Addpackage() {
-  const apiURL = "http://localhost:8080/api";
+  const apiURL = "https://api.howdzat.com/api";
   const [packageimage, setimage1] = useState("");
   const [packagename, setpackagename] = useState("");
   const [packageprice, setpackageprice] = useState("");
@@ -17,6 +17,8 @@ function Addpackage() {
   const [outdoorgames, setoutdoorgames] = useState();
   const [swimmingpool, setswimmingpool] = useState()
   const [packagefeature, setpackagefeature] = useState();
+  const [starttime, setstarttime] = useState("");
+  const [endtime, setendtime] = useState("");
   const [discount, setdiscount] = useState("");
   const formdata = new FormData();
 
@@ -32,6 +34,10 @@ function Addpackage() {
   const SP =(e)=>{
     setswimmingpool(Array.isArray(e)?e.map(x=>x.value):[]);
   }
+
+
+
+
   const addpackage = async (e) => {
     e.preventDefault();
 
@@ -42,7 +48,9 @@ function Addpackage() {
       !packagefeature ||
       !indoorgames ||
       !outdoorgames ||
-      !discount
+      !discount||
+      !starttime ||
+      !endtime
     ) {
       alert("please enter all fields");
     }
@@ -54,6 +62,8 @@ function Addpackage() {
     formdata.append("swimmingpool", (swimmingpool));
     formdata.append("discount", discount);
     formdata.append("packagefeature", (packagefeature));
+    formdata.append("starttime", starttime);
+    formdata.append("endtime", (endtime));
 
     try {
       const config = {
@@ -87,14 +97,14 @@ function Addpackage() {
   ];
 
   const Includes = [
-    { label: "Welcome drinks(Arrival Time)", value: "Welcome drinks" },
-    { label: "Break fast(8:30 pm to 10:30 pm)", value: "Break fast" },
-    { label: "Buffet lunch(1:00 pm to 2:45 pm)", value: "Buffet lunch" },
+    { label: "Welcome drinks(Arrival Time)", value: "Welcome drinks(Arrival Time)" },
+    { label: "Break fast(8:30 pm to 10:30 pm)", value: "Break fast(8:30 pm to 10:30 pm)" },
+    { label: "Buffet lunch(1:00 pm to 2:45 pm)", value: "Buffet lunch(1:00 pm to 2:45 pm)" },
     {
       label: "Evening hi-tea snacks(4:30 pm to 5:30 pm)",
-      value: "Evening hi-tea snacks",
+      value: "Evening hi-tea snacks(4:30 pm to 5:30 pm)",
     },
-    { label: "Night dinner(8:00 pm to 9:30 pm)", value: "Night dinner" },
+    { label: "Night dinner(8:00 pm to 9:30 pm)", value: "Night dinner(8:00 pm to 9:30 pm)" },
   ];
 
   const SwimmingPool = [
@@ -139,6 +149,8 @@ const [disvalue, getdisvalue] = useState();
                     onChange={(e) => setpackagename(e.target.value)}
                   />
                 </div>
+
+
               </div>
               <div className="row pt-3">
                 <div className="mt col-4">
@@ -156,6 +168,27 @@ const [disvalue, getdisvalue] = useState();
                     label="Customer Offer Price *"
                     style={{ width: "300px" }}
                     onChange={(e) => setdiscount(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="row pt-3">
+                <div className="mt col-4">
+                  <TextField
+                    id="standard-secondary"
+                    label="Package Start Time *"
+                    style={{ width: "300px" }}
+                    type="time"
+                    onChange={(e) => setstarttime(e.target.value)}
+                  />
+                </div>
+
+                <div className="mt col-4">
+                  <TextField
+                    id="standard-secondary"
+                    label="Package End Time *"
+                    style={{ width: "300px" }}
+                    type="time"
+                    onChange={(e) => setendtime(e.target.value)}
                   />
                 </div>
               </div>

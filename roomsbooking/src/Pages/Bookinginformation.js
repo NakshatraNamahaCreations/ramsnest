@@ -6,6 +6,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+
+
 function Bookinginformation() {
   const [open, setOpen] = React.useState(false);
     const [open1, setOpen1] = React.useState(false);
@@ -40,12 +42,7 @@ function Bookinginformation() {
             <b>Payment</b>
           </h4>
         </div>
-        {/* <div className="col-2">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/4940/4940162.png"
-            width="25px"
-          />
-        </div> */}
+        
       </div>
       <div className="justbt">
         <p>Payment Methods </p>

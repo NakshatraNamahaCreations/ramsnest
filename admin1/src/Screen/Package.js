@@ -73,6 +73,14 @@ function Rooms() {
       text: "Outdoor games",
     },
     {
+      dataField: "starttime",
+      text: "Start Time",
+    },
+    {
+      dataField: "endtime",
+      text: "End Time",
+    },
+    {
       dataField: "packagefeature",
       text: "packagefeature",
     },

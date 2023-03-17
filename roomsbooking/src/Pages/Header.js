@@ -9,7 +9,7 @@ import Modal from "react-bootstrap/Modal";
 function Header() {
   const [colorchange, setcolorchange] = useState("");
   const [show, setShow] = useState(false);
-
+  const user = JSON.parse(sessionStorage.getItem("user"));
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -103,7 +103,7 @@ function Header() {
           </div>
         </div>
         <div className="flex" style={{ marginTop: "20px" }}>
-          <h2>Hello, Daniel</h2>{" "}
+          <h2>Hello, {user.name}</h2>{" "}
           <img
             src="https://cdn-icons-png.flaticon.com/512/9437/9437514.png"
             style={{
@@ -123,7 +123,7 @@ function Header() {
             onFocus={handleOnFocus}
             formatResult={formatResult}
           />
-          <img
+          {/* <img
             onClick={handleShow}
             src="https://cdn-icons-png.flaticon.com/128/8017/8017777.png"
             width="20px"
@@ -134,48 +134,10 @@ function Header() {
               top: "142px",
               zIndex: "12",
             }}
-          />
+          /> */}
         </div>
       </div>
-      {/* <div className="margin" style={{ marginTop: "15px" }}>
-        <OwlCarousel className="owl-theme" loop margin={10} nav items={1}>
-          <div class="item">
-            <img
-              src="https://img.freepik.com/free-photo/vegetables-set-left-black-slate_1220-685.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=ais"
-              width="100"
-              style={{height:"65px",borderRadius:"10px"}}
-            />
-          </div>
-          <div class="item">
-          <img
-              src="https://img.freepik.com/free-photo/vegetables-set-left-black-slate_1220-685.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=ais"
-              width="100"
-              style={{height:"65px",borderRadius:"10px"}}
-            />
-          </div>
-          <div class="item">
-          <img
-              src="https://img.freepik.com/free-photo/vegetables-set-left-black-slate_1220-685.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=ais"
-              width="100"
-              style={{height:"65px",borderRadius:"10px"}}
-            />
-          </div>
-          <div class="item">
-          <img
-              src="https://img.freepik.com/free-photo/vegetables-set-left-black-slate_1220-685.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=ais"
-              width="100"
-              style={{height:"65px",borderRadius:"10px"}}
-            />
-          </div>
-          <div class="item">
-          <img
-              src="https://img.freepik.com/free-photo/vegetables-set-left-black-slate_1220-685.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.1.35560669.1669291340&semt=ais"
-              width="100"
-              style={{height:"65px",borderRadius:"10px"}}
-            />
-          </div>
-        </OwlCarousel>
-      </div> */}
+      
       <Modal
         show={show}
         onHide={() => setShow(false)}

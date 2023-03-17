@@ -223,7 +223,7 @@ function Promocode() {
       </div>
       <div className="col-md-10">
         <div className="magin">
-          <Button variant="success" onClick={showModal} className="mt-4 ml-5"  >
+          <Button  onClick={showModal} className="mt-4 ml-5"  style={{background:"black"}} >
             Add Promocode
           </Button>
           <Modal show={isOpen} onHide={hideModal}>

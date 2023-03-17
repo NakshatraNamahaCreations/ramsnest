@@ -6,7 +6,7 @@ const { JWT_SECRET } = require("../../config/key");
 
 class customerauth {
   async postSignup(req, res) {
-    let { name, email, password, cpassword, phonenumber, profileimage } =
+    let { name, email, password, cpassword, phonenumber, profileimage ,dob,gender} =
       req.body;
 
     if (!name || !email || !password || !cpassword || !phonenumber) {
@@ -49,6 +49,8 @@ class customerauth {
                   phonenumber,
                   profileimage,
                   role: 1,
+                  dob:"",
+                  gender:"",
                   usertype: "email",
                 });
                 newUser
@@ -64,6 +66,8 @@ class customerauth {
                         status: data.status,
                         usertype: data.usertype,
                         profileimage: "",
+                        dob:"",
+                        gender:"",
                       },
                     });
                   })
@@ -108,6 +112,7 @@ class customerauth {
               name: data.name,
               email: data.email,
               phonenumber: data.phonenumber,
+              profileimage:data.profileimage,
             
             },
             JWT_SECRET
@@ -137,6 +142,68 @@ class customerauth {
       return res.status(500).json({ error: "something went to wrong" });
     }
   }
+
+  async postupdaterofile(req, res) {
+    let id = req.params.id;
+    let file = req.file.filename;
+    let data = await customermodel.findOneAndUpdate(
+      { _id: id },
+      {
+        profileimage: file,
+      }
+    );
+    let {dob}=req.body;
+    if (data) {
+      console.log(data);
+      return res.json({
+        success: "Updated",
+        user: {
+          id: data._id,
+          name: data.name,
+          email: data.email,
+          phonenumber: data.phonenumber,
+          profileimage: file,
+          dob:dob,
+          usertype: data.usertype,
+        },
+      });
+    } else {
+      return res.status(500).json({ error: "failed" });
+    }
+  }
+  async updatecustomer(req, res) {
+    let id = req.params.id;
+    let { name, email, phonenumber,dob,gender } = req.body;
+
+    let data = await customermodel.findOneAndUpdate(
+      { _id: id },
+      {
+        name,
+        phonenumber,
+        email,
+        dob,
+        gender
+      }
+    );
+    if (data) {
+      return res.json({
+        success: "updated successfuly",
+        user: {
+          id: data._id,
+          name: name,
+          email: email,
+          phonenumber: phonenumber,
+          status: data.status,
+          usertype: data.usertype,
+          profileimage: data.profileimage,
+          dob:data.dob,
+          gender:data.gender
+        },
+      });
+    }
+  }
+
+
 }
 
 const customercontroller=new customerauth();

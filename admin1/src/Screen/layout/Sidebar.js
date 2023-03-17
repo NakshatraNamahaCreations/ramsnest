@@ -49,26 +49,27 @@ function Sidebar() {
             </SubMenu>
             <SubMenu title="Rooms" icon={<FaGem />}>
               <MenuItem>
-                Category<Link to="/category"></Link>
+                Category<Link to="/roomcat"></Link>
               </MenuItem>
               <MenuItem>
-                Subcategory<Link to="/subcategory"></Link>
+                Rooms<Link to="/hotels"></Link>
               </MenuItem>
               <MenuItem>
-                Foods<Link to="/food"></Link>
-              </MenuItem>
-              <MenuItem>
-                Foods order<Link to="/customerorder"></Link>
+                Rooms Bookings<Link to="/hotelbooking"></Link>
               </MenuItem>
             </SubMenu>
-            <MenuItem icon={<FaRegLaughWink />}>
-             Packages<Link to="/package"></Link>
-            </MenuItem>
-          
-              <MenuItem icon={<FaCamera />}>
-               Notification<Link to="/notification"></Link>
+            <SubMenu title="Packages" icon={<FaGem />}>
+              <MenuItem>
+                Packages<Link to="/package"></Link>
               </MenuItem>
-             
+              <MenuItem>
+                Package customer<Link to="/buypackages"></Link>
+              </MenuItem>
+            </SubMenu>
+
+            <MenuItem icon={<FaCamera />}>
+              Notification<Link to="/notification"></Link>
+            </MenuItem>
 
             <MenuItem icon={<FaUser />}>
               Customers<Link to="/customer"></Link>
@@ -79,8 +80,6 @@ function Sidebar() {
           </Menu>
         </SidebarContent>
         <SidebarFooter>
-       
-
           <div style={{ height: "400px" }}></div>
         </SidebarFooter>
       </ProSidebar>

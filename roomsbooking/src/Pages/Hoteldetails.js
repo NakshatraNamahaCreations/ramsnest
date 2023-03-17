@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import { useLocation,Link } from "react-router-dom";
+import { App as CapacitorApp } from '@capacitor/app';
+
 function Hoteldetails() {
   const [index, setIndex] = useState(0);
-
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+  const location = useLocation();
+  const { data } = location.state;
+  CapacitorApp.addListener('backButton', ({canGoBack}) => {
+    if(!canGoBack){
+      CapacitorApp.exitApp();
+    } else {
+      window.history.back();
+    }
+  });
 
   return (
     <div className="marginbtm">
@@ -23,36 +34,22 @@ function Hoteldetails() {
           ></i>
         </a>
         <Carousel activeIndex={index} onSelect={handleSelect}>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://img.freepik.com/free-photo/elegant-hotel-room-with-big-bed_1203-1494.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.2.35560669.1669291340&semt=sph"
-              alt="First slide"
-              style={{ height: "285px" }}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://img.freepik.com/free-photo/luxury-classic-modern-bedroom-suite-hotel_105762-1787.jpg?size=626&ext=jpg&uid=R19754806&ga=GA1.2.35560669.1669291340&semt=sph"
-              alt="Second slide"
-              style={{ height: "285px" }}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://img.freepik.com/free-photo/3d-rendering-beautiful-luxury-bedroom-suite-hotel-with-working-table_105762-2154.jpg?size=626&ext=jpg&ga=GA1.2.35560669.1669291340&semt=sph"
-              alt="Third slide"
-              style={{ height: "285px" }}
-            />
-          </Carousel.Item>
+          {data.roomimage.map((i) => (
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={"https://api.howdzat.com/rooms/" + i}
+                alt="First slide"
+                style={{ height: "285px" }}
+              />
+            </Carousel.Item>
+          ))}
         </Carousel>
       </div>
       <div className="margin">
         <div className="hc">
           <h4>
-            <b>Ram's Nest</b>
+            <b>{data.roomname}</b>
           </h4>
           <i class="fa-regular fa-bookmark"></i>
         </div>
@@ -61,9 +58,10 @@ function Hoteldetails() {
             {" "}
             <i
               class="fa-solid fa-location-dot"
-              style={{ color: "black" ,marginRight:"5px"}}
+              style={{ color: "black", marginRight: "5px" }}
             ></i>
-            Survey No 46, Gaushala Road, behind Art of Living, Kaggalipura Bangalore, Karnataka 560082 India
+            Survey No 46, Gaushala Road, behind Art of Living, Kaggalipura
+            Bangalore, Karnataka 560082 India
           </p>
         </div>
 
@@ -72,8 +70,7 @@ function Hoteldetails() {
             <b>Description</b>
           </h5>
           <p>
-            To book HiCare Home rooms Services follow these steps: Fill your
-            pin code in the prompt on the website
+            {data.roomdesc}
           </p>
         </div>
         <h5 className="margintop">
@@ -421,15 +418,15 @@ function Hoteldetails() {
             {/* <p>Floor Price</p> */}
             <h6 style={{ marginTop: "12px" }}>
               <b>
-                <i class="fa-solid fa-indian-rupee-sign"></i>290/night
+                <i class="fa-solid fa-indian-rupee-sign"></i>{data.roomprice}
               </b>
             </h6>
           </div>
           <div className="bookflx1">
             <i class="fa-solid fa-bag-shopping"></i>
-            <a href="/book" style={{ color: "white !important" }}>
+            <Link to="/sbs" state={{data:data}}>
               <h4 style={{ color: "white" }}>Book Now</h4>{" "}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

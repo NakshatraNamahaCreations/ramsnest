@@ -47,7 +47,7 @@ class adminlogin {
 				});
 			} else {
 				if (data.password === password || data.email === email) {
-					return res.status(200).json({ success: "Login Success",user:{
+					return res.status(200).json({ success: "Login Success",admin:{
             email:data.email,
             id:data._id
           } });

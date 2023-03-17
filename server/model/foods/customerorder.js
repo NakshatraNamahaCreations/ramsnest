@@ -16,8 +16,8 @@ const orderSchema = new mongoose.Schema(
     roomname: {
       type: String,
     },
-    roomnumber: { 
-        type: String 
+    roomnumber: {
+      type: String,
     },
     foodid: {
       type: String,
@@ -25,9 +25,29 @@ const orderSchema = new mongoose.Schema(
     customername: {
       type: String,
     },
+    phonenumber: {
+      type: String,
+    },
+    paymentmethod: {
+      type: String,
+    },
+    total: {
+      type: String,
+    },
+    status:{
+      type:String,
+      default:"inprocess",
+      enum:[
+          "inprocess",
+          "assigned",
+          "delivered",
+          "cancelled"
+      ]
+  }
+
   },
   { timestamps: true }
 );
 
-const customerordermodel = mongoose.model("customerorder", orderSchema);
-module.exports = customerordermodel;
+const foodordermodel = mongoose.model("foodorder", orderSchema);
+module.exports = foodordermodel;

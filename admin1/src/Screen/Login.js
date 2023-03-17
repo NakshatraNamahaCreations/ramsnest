@@ -35,6 +35,7 @@ function Login() {
           if (response.status === 200) {
             alert("Account created successful");
             window.location.assign("/");
+            
           }
         });
       } catch (error) {
@@ -62,11 +63,11 @@ function Login() {
           },
         };
         let res = await axios(config);
-        console.log(res.status);
+        console.log(res.data);
         if (res.status === 200) {
           alert("Login successful");
-          window.location.assign("/home");
-          sessionStorage.setItem("admin");
+         window.location.assign("/home");
+          sessionStorage.setItem("admin",JSON.stringify(res.data.admin));
           return res;
         } else {
           alert("Email or Mobile Already Exist");

@@ -33,14 +33,14 @@ function Viewallpackages() {
             <b>All Packages</b>
           </h4>
         </div>
-        <div className="col-2">
+        {/* <div className="col-2">
           <a href="/searchpage">
             <i
               class="fa-solid fa-magnifying-glass"
               style={{ fontSize: "20px" }}
             ></i>
           </a>
-        </div>
+        </div> */}
       </div>
 
       <div className="">
@@ -48,7 +48,7 @@ function Viewallpackages() {
           <div className="row ">
             {packages?.map((data) => (
               <div className=" fc " style={{ width: "50%" }}>
-                <Link  to={{ pathname: "/packagedetails", item: { data: data } }}>
+                <Link to="/packagedetails" state={{ data: data }}>
                 <div>
                   <img
                     src={"https://api.howdzat.com/package/" + data.packageimage}

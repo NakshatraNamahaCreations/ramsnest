@@ -1083,3 +1083,47 @@ Male{
   border-radius: 10px;
   margin-top: 10px;
 }
+.imp{
+  border-radius: 0px !important;
+}
+.emptyorder{
+  margin-top: 75%;
+  text-align: center;
+
+}
+.pp{
+display: flex;
+justify-content: space-between;
+}
+.ppd{
+display: flex;
+gap: 5px;
+}
+.bibrd:hover{
+  background: #0000004a;
+  color: white;
+}
+.ig img{
+  width: 100px;
+  height: 80px;
+}
+.ig{
+  display: flex;
+  justify-content: space-between;
+}
+.jut{
+  display: flex;
+  justify-content: space-between;
+}
+.clo{
+    margin-top: 5px;
+    color: green;
+    background: #19875417;
+    padding: 3px;
+    text-align: center;
+    border-radius:10px;
+    height: 20px;
+    width: 80px;
+    font-size: 12px
+ 
+}

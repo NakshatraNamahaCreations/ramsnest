@@ -13,6 +13,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import DatePicker from "react-multi-date-picker";
 // import * as XLSX from "xlsx";
+
 import { DownloadTableExcel } from "react-export-table-to-excel";
 
 function Rooms() {
@@ -20,7 +21,6 @@ function Rooms() {
   const { SearchBar, ClearSearchButton } = Search;
   const imageURL = "https://api.howdzat.com";
   const [selected, setselected] = useState([]);
-
   const [stock, setstock] = useState("");
   const [free, setfree] = useState("");
   const [date, setdate] = useState(new Date());
@@ -34,7 +34,6 @@ function Rooms() {
   const { ExportCSVButton } = CSVExport;
   const tableRef = useRef(null);
 
-  console.log(image);
   const showModal = () => {
     setIsOpen(true);
   };
@@ -76,15 +75,19 @@ function Rooms() {
     {
       dataField: "",
       text: "food Images",
-      formatter:(cell,row)=>{
-        return(
-          <div > 
-            <img src={"https://api.howdzat.com/food/" + row.foodimage[0]}  width="45px" height="45px"/>
-            <img className="fi" src={"https://api.howdzat.com/food/" + row.foodimage[1]}  width="45px" height="45px"/>
-            <img  className="fi" src={"https://api.howdzat.com/food/" + row.foodimage[2]}  width="45px" height="45px"/>
+      formatter: (cell, row) => {
+        return (
+          <div>
+            {row.foodimage?.map((i) => (
+              <img
+                src={"https://api.howdzat.com/food/" + i}
+                width="45px"
+                height="45px"
+              />
+            ))}
           </div>
-        )
-      }
+        );
+      },
     },
     {
       dataField: "fooddesc",
@@ -94,7 +97,7 @@ function Rooms() {
       dataField: "foodprice",
       text: "food Price",
     },
-   
+
     {
       dataField: "",
       text: "Action",
@@ -161,31 +164,29 @@ function Rooms() {
   }, []);
 
   const getallfoods = async () => {
-    let res = await axios.get(
-      "https://api.howdzat.com/api/getallfood"
-    );
+    let res = await axios.get("https://api.howdzat.com/api/getallfood");
     if ((res.status = 200)) {
       console.log(res);
       setfood(res.data?.foods);
     }
   };
 
-
-
   return (
     <div className="row">
       <Header />
       <div className="col-md-2">
-       <Sidebar />
+        <Sidebar />
       </div>
-      <div className="col-md-10 v1" >
+      <div className="col-md-10 v1">
         <div className="magin">
           <div className="d-flex">
-            <a href="/addfood" className="btn btn-primary mt-2 me-2" style={{background:"black"}}>
+            <a
+              href="/addfood"
+              className="btn btn-primary mt-2 me-2"
+              style={{ background: "black" }}
+            >
               Add food
             </a>
-
-           
           </div>
 
           <Modal show={isOpen} onHide={hideModal}>

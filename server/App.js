@@ -35,6 +35,12 @@ const food=require("./route/foods/food");
 const packages =require("./route/package/packages");
 const adminlogin=require("./route/admin/adminlogin");
 const promocode=require("./route/admin/promocode");
+const notification=require("./route/admin/notification");
+const foodorder=require("./route/foods/customerorder");
+const buypackage=require("./route/package/buypackages");
+const rooms=require("./route/rooms/rooms");
+const roomsorder=require("./route/rooms/roomorders");
+const roomcategory=require("./route/rooms/category");
 
 //routes
 app.use("/api", customerauth);
@@ -46,6 +52,12 @@ app.use("/api",subcategory);
 app.use("/api",packages);
 app.use("/api",adminlogin);
 app.use("/api",promocode);
+app.use("/api",notification);
+app.use("/api",foodorder);
+app.use("/api",buypackage);
+app.use("/api",rooms);
+app.use("/api",roomsorder);
+app.use("/api",roomcategory);
 
 
 const PORT = process.env.PORT || 8080;

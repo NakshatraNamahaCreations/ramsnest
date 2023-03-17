@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Accordion from "react-bootstrap/Accordion";
-
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-import Card from 'react-bootstrap/Card';
+import axios from "axios";
+import { useAccordionButton } from "react-bootstrap/AccordionButton";
+import Card from "react-bootstrap/Card";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 function CustomToggle({ children, eventKey }) {
@@ -17,7 +17,7 @@ function CustomToggle({ children, eventKey }) {
 
   return (
     <button
-      style={{ width:"100%",border:"none" ,background:"white"}}
+      style={{ width: "100%", border: "none", background: "white" }}
       onClick={decoratedOnClick}
     >
       {children}
@@ -28,16 +28,45 @@ function CustomToggle({ children, eventKey }) {
 function Profile() {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+  const [image, setimage] = useState();
 
+  const formdata = new FormData();
+  const user = JSON.parse(sessionStorage.getItem("user"));
   const logout = () => {
     alert("Logout");
     window.location.assign("/");
+    sessionStorage.removeItem("user");
   };
 
+  const addimage = async (e) => {
+    e.preventDefault();
+    formdata.append("profileimage", image);
+
+    axios({
+      method: "post",
+      url: `https://api.howdzat.com/api/addimage/${user.id}`,
+      data: formdata,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        //handle success
+        console.log(response);
+        window.location.reload();
+        alert("Updated successfully");
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+      })
+      .catch(function (error) {
+        //handle error
+        console.log(error);
+      });
+  };
   return (
     <div className="marginbtm">
       <div>
@@ -48,42 +77,84 @@ function Profile() {
             </h3>
           </div>
           <div className="center">
-            <div>
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT70BCbCMem6iqUraALv89e27HfAriNKHce4w&usqp=CAU"
-                style={{
-                  width: "90px",
-                  borderRadius: "50%",
-                  height: "90px",
-                }}
-              />
-
-              <div style={{ marginTop: "-24px", marginLeft: "50px" }}>
-                <i
-                  class=" fa-solid fa-pen"
+            {user.profileimage == "" ? (
+              <div>
+                {" "}
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT70BCbCMem6iqUraALv89e27HfAriNKHce4w&usqp=CAU"
                   style={{
-                    color: "white",
-                    background: "#0484b9",
-                    padding: "4px",
-                    fontSize: "10px",
+                    width: "90px",
+                    borderRadius: "50%",
+                    height: "90px",
                   }}
-                ></i>
+                />
+                <div style={{ marginTop: "-24px", marginLeft: "50px" }}>
+                  <i
+                    class=" fa-solid fa-pen"
+                    style={{
+                      color: "white",
+                      background: "#0484b9",
+                      padding: "4px",
+                      fontSize: "10px",
+                    }}
+                    onClick={handleShow2}
+                  ></i>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div>
+                <img
+                  src={"https://api.howdzat.com/userimages/" +user.profileimage}
+                  style={{
+                    width: "90px",
+                    borderRadius: "50%",
+                    height: "90px",
+                  }}
+                />
+                <div style={{ marginTop: "-24px", marginLeft: "50px" }}>
+                  <i
+                    class=" fa-solid fa-pen"
+                    style={{
+                      color: "white",
+                      background: "#0484b9",
+                      padding: "4px",
+                      fontSize: "10px",
+                    }}
+                    onClick={handleShow2}
+                  ></i>
+                </div>
+              </div>
+            )}
 
+            <Modal show={show2} onHide={handleClose2}>
+              <Modal.Header closeButton>
+                <Modal.Title>Select profile photo</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setimage(e.target.files[0])}
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose2}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={addimage}>
+                  Update
+                </Button>
+              </Modal.Footer>
+            </Modal>
             <h3>
-              <b>Andrew Ainsley</b>
+              <b>{user.name}</b>
             </h3>
 
             <p>
-              <b>andrew_ainsley@gmail.com</b>
+              <b>{user.email}</b>
             </p>
           </div>
-          <div>
-          
-          </div>
-         
-        
+          <div></div>
 
           <div>
             <div className="" style={{ marginTop: "30px", color: "black" }}>
@@ -134,25 +205,9 @@ function Profile() {
                 <Switch {...label} defaultChecked />
               </div>
             </div>
-            {/* <div>
-              <Link to="/language" className="link">
-                <div className="line">
-                  <div className="line">
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/128/6133/6133973.png"
-                      width="20px"
-                      style={{ marginBottom: "15px" }}
-                    />
-                    <p>Language</p>
-                  </div>
-                  <div>
-                    <i class="fa-solid fa-chevron-right"></i>
-                  </div>
-                </div>
-              </Link>
-            </div> */}
+
             <div>
-              <Link to="/security" className="link">
+              <Link to="/allbooking" className="link">
                 <div className="line">
                   <div className="line">
                     <img
@@ -160,7 +215,7 @@ function Profile() {
                       width="20px"
                       style={{ marginBottom: "15px" }}
                     />
-                    <p>Security</p>
+                    <p>Bookings</p>
                   </div>
                   <div>
                     <i class="fa-solid fa-chevron-right"></i>

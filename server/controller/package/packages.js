@@ -9,6 +9,8 @@ class packages {
       indoorgames,
       outdoorgames,
       swimmingpool,
+      starttime,
+      endtime,
       discount,
     } = req.body;
     let file = req.files[0].filename;
@@ -19,7 +21,8 @@ class packages {
         !packageprice,
         !packagefeature,
         !indoorgames,
-        
+        !starttime,
+        !endtime,
         !outdoorgames,
         !discount)
       ) {
@@ -31,6 +34,8 @@ class packages {
           packageprice,
           packageimage: file,
           indoorgames,
+          starttime,
+          endtime,
           outdoorgames,
           swimmingpool,
           discount,

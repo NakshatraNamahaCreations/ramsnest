@@ -14,8 +14,6 @@ function Addfood() {
   const [subcategory, setsubcategory] = useState("");
   const [categorydata, setcategorydata] = useState([]);
   const [subcategorydata, setsubcategorydata] = useState([]);
-  const [categoryname, setcategoryname] = useState("");
-  const [subcategoryname, setsubcategoryname] = useState("");
   const apiURL = "https://api.howdzat.com/api";
   const [image1, setimage1] = useState("");
   const [image2, setimage2] = useState("");
@@ -23,7 +21,6 @@ function Addfood() {
   const [foodname, setfoodname] = useState("");
   const [fooddesc, setfooddesc] = useState("");
   const [foodprice, setfoodprice] = useState("");
-  const [foodgst, setfoodgst] = useState("");
   const [foodvolume, setfoodvolume] = useState("");
   const [foodvolumetype, setfoodvolumetype] = useState("");
 

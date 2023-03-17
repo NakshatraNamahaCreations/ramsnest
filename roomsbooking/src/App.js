@@ -36,7 +36,9 @@ import Foodsubcategory from "./Pages/Foodsubcategory";
 import Allfoods from "./Pages/Allfoods";
 import Allfooddetails from "./Pages/Allfooddetails";
 import Packagedetails from "./Pages/Packagedetails";
-
+import Foodpayment from './Pages/Foodpayment';
+import React, { useState } from "react";
+import BInfo from "./Pages/BInfo";
 
 function App() {
   return (
@@ -84,7 +86,9 @@ function App() {
           <Route path="/allfoods" element={<Allfoods />}></Route>
           <Route path="/allfooddetails" element={<Allfooddetails />}></Route>
           <Route path="/packagedetails" element={<Packagedetails />}></Route>
-
+          <Route path="/foodpayment" element={<Foodpayment />}></Route>
+   
+             <Route path="/binfo" element={<BInfo />}></Route>
         </Routes>
       </Router>
     </div>

@@ -36,7 +36,7 @@ function Foods(props) {
       type: "addBasketItem",
       item: { product: e, quantity: 1 },
     });
-    alert("Food is added to cart");
+   
   };
   if (loading) {
     return (
